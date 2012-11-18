@@ -73,7 +73,12 @@
 		state[r] = state[r].substring(0, destCol) + tile + state[r].substring(destCol + 1);
 
 		// do drop and match
-		return dropAndMatch(state, r, destCol);
+		state = dropAndMatch(state, r, destCol);
+		
+		// drop tile above original position
+		state = dropAndMatch(state, r - 1, c);
+
+		return state;
 	}
 
 	// perform a gravity drop and match
@@ -81,13 +86,15 @@
 	// r: row index of tile to move
 	// c: col index of tile to move
 	var dropAndMatch = function(state, r, c) {
-		state = state.slice(0);
 		var row = state[r];
 		var tile = row[c];
 
+		if (tile < "a" || tile > "z") return state;
+
+		state = state.slice(0);
 		row = state[r] = row.substring(0, c) + " " + row.substring(c + 1)
 
-		// calculate fall
+		// calculate fall 
 		var landingRow;
 		for(landingRow = r; state[landingRow + 1][c] === " "; landingRow++) ; // <- semicolon! beware!
 
@@ -108,7 +115,7 @@
 
 		if (state[landingRow + 1][c] === tile) {
 			matches = true;
-			state[landingRow + 1] = state[landingRow + 1].substring(0, c) + " " + state[landingRow].substring(c + 1);
+			state[landingRow + 1] = state[landingRow + 1].substring(0, c) + " " + state[landingRow + 1].substring(c + 1);
 		}
 
 		if (matches) {
@@ -122,6 +129,11 @@
 
 		if (rightMatch && state[landingRow - 1][c + 1].match(/[a-z]/))
 			state = dropAndMatch(state, landingRow - 1, c + 1);
+
+		if (landingRow > r) {
+			// drop tile above original position
+			state = dropAndMatch(state, r - 1, c);
+		}
 
 		return state;
 	}
