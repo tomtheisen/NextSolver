@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Next Solver</title>
+		<meta charset="utf-8">
+		<!-- Bootstrap -->
+		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+		<style>
+			textarea#startState {
+				font-family: monospace;
+				width:200px;
+				height:200px;
+				display: block;
+			}
+
+			div.solutionRow {
+				font-family: monospace;
+				white-space: pre;
+			}
+
+			div.footer {
+				position: absolute;
+				width: 100%;
+				bottom: 0;
+				text-align: center;
+				margin-bottom: 20px;
+			}
+
+			div#instructions {
+				display: none;
+			}
+
+			div#outputWindow {
+				height: 600px;
+				overflow: hidden;
+			}
+
+			div.solutionState {
+				margin: 20px;
+				height: 600px;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="page-header">
+				<h1>n-e-x-t solver!</h1>
+			</div>
+
+			<div class="alert alert-info" id="instructions">
+			  <button type="button" class="close">×</button>
+			  Use the text area to the left to enter a n-e-x-t scenario.
+		  	<ul>
+		  		<li><strong>#</strong> represents walls
+	  			<li><strong>a to z</strong> represent movable tiles
+  				<li><strong>(space)</strong> represents open space
+		  	</ul>
+
+		  	Then click the solve button.  Supposedly, you will then be shown a solution if one exists.  It is likely that this is very buggy.
+		  	<br><br>n-e-x-t solver is written by Tom Theisen
+			</div>
+
+			<form>
+				<div class="row">
+					<div class="span5">
+						<textarea id="startState" >
+							####
+							# a#
+							#ac#
+							####
+						</textarea>
+					</div>
+
+					<div class="span2">
+						<div class="btn-group btn-group-vertical">
+							<span id="solveButton" class="btn btn-primary">Solve</span>
+							<span id="instructionsButton" class="btn">wat???</span>
+						</div>
+					</div>
+
+					<div class="span5"> 
+						<h3>Solution:</h3>
+						<div id="outputWindow"> 
+						</div>
+					</div>
+
+				</div>
+			</form>
+		</div>
+		<div class="footer">
+			n-e-x-t solver by Tom Theisen.  Use at your own bodily peril.
+		</div>
+		<script src="js/jquery-1.8.3.min.js"></script>
+		<script src="js/bootstrap.js"></script>
+		<script src="js/underscore.js"></script>
+		<script src="js/next-solver.js"></script>
+	</body>
+</html>
